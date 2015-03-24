@@ -1,0 +1,19 @@
+* Requirements
+
+* "Architecture"
+- RequireJS is used for "modularity"
+- r.js will be used for final optimized build
+- GoogleMaps API presents a bit of a challenge to this idealized picture,
+since it loads asynchronously and we must be user-friendly and handle the
+situation where it fails to load properly. Most examples of using GoogleMaps API
+with RequireJS prefer to sidestep this error handling and the consensus is to
+either use async! plugin or its variants using promises.
+Since one of the explicit requirement is proper (aka graceful) error handling,
+I decided to handle GoogleMaps API loading before requirejs kicks in.
+This way the majority of the app does not have to worry about this, essentially
+once the apps loads it assumes that GoogleMaps API has been properly loaded,
+and if not, the app is not even started, instead a simple error reporting is done on
+the spot.
+
+* References
+- Idea of gluing modules came from this http://stackoverflow.com/a/28466452/404328
