@@ -25,9 +25,18 @@ script.onload = function(event) {
 
 script.src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=doit";
 document.body.appendChild(script);
-
+setTimeout(function () {
+  var el = document.getElementById('wait_msg');
+  if (typeof google === 'undefined') {
+    el.innerHTML = 'Google Maps API is not available - please try again later!';
+  }
+}, 5000);
 // TODO: setup somekind of timeout - for 10 seconds or so - which will inform that gmaps is not here???
 function doit() {
   console.log("do it!!!");
+
+  define('gmaps', function () {
+    return google.maps;
+  });
   require(['js/app.js']);
 }
