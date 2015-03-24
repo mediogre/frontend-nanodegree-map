@@ -1,42 +1,48 @@
-// define jquery
-define('jquery', function() {
-  return jQuery;
-});
+(function (doc) {
+  var googleMapsFailed = function() {
+    if (typeof google === 'undefined') {
+      var el = doc.getElementById('wait_msg');
+      el.innerHTML = 'Google Maps API is not available - please try again later!';
+    }
+  };
 
-// define knockout
-define('ko', function () {
-  return ko;
-});
+  // load google maps
+  var script = doc.createElement("script");
 
-// load google maps
-var script = document.createElement("script");
+  // in case google maps is not loading - gracefully report
+  script.onerror = function(event) {
+    googleMapsFailed();
+  };
 
-// in case google maps is not loading - gracefully report
-script.onerror = function(event) {
-  console.log("You have no conscience");
-};
+  script.src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=alrightRequireItIs";
+  doc.body.appendChild(script);
 
-// otherwise - define google maps and call into the app
-script.onload = function(event) {
-  // the app is then blissfully unaware of all the loading hoops we went through
-  console.log("Ok - google is here");
-  console.log(google.maps);
-};
+  // on successful gmaps API loading our alrightRequireItIs will run and start the actual app,
+  // but we have no good way of knowing if it failed
+  // so we'll try to check if it has loaded in 5 seconds and if 'google' global has not appeared
+  // we'll assume that something has gone wrong and let user know to try again later
+  setTimeout(googleMapsFailed, 5000);
+})(document);
 
-script.src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=doit";
-document.body.appendChild(script);
-setTimeout(function () {
-  var el = document.getElementById('wait_msg');
-  if (typeof google === 'undefined') {
-    el.innerHTML = 'Google Maps API is not available - please try again later!';
-  }
-}, 5000);
-// TODO: setup somekind of timeout - for 10 seconds or so - which will inform that gmaps is not here???
-function doit() {
-  console.log("do it!!!");
+// this is the callback which google maps api will call indicating that it is finished loading
+// now we simply start our app and it's completely oblivious to all the troubles we went through
+//
+function alrightRequireItIs() {
+  // define jquery
+  define('jquery', function() {
+    return jQuery;
+  });
 
+  // define knockout
+  define('ko', function () {
+    return ko;
+  });
+
+  // define gmaps to allow our app to depend on it and not use globals
   define('gmaps', function () {
     return google.maps;
   });
+
+  // finally!!!
   require(['js/app.js']);
 }
