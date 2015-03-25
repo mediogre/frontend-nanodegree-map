@@ -1,11 +1,12 @@
-define(['jquery', 'ko', 'gmaps'], function ($, ko, gmaps) {
+define(['jquery', 'ko', 'gmaps', 'view_model'], function ($, ko, gmaps, viewModel) {
   $('#wait_msg').hide();
 
   var moscow = new gmaps.LatLng(55.752532, 37.622828);
 
   var map = new gmaps.Map(document.getElementById('map-canvas'), {
     center: moscow,
-    zoom: 15
+    zoom: 15,
+    disableDefaultUI: true
   });
 
   var request = {
@@ -18,10 +19,13 @@ define(['jquery', 'ko', 'gmaps'], function ($, ko, gmaps) {
   service.nearbySearch(request, callback);
 
   function callback(results, status) {
+    viewModel.museums.removeAll();
     if (status == gmaps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
         var place = results[i];
         createMarker(results[i]);
+
+        viewModel.museums.push({title: place.name});
       }
     }
   }
@@ -38,4 +42,6 @@ define(['jquery', 'ko', 'gmaps'], function ($, ko, gmaps) {
       infowindow.open(map, this);
     });
   }
+
+  ko.applyBindings(viewModel);
 });

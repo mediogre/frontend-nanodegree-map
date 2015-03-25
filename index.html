@@ -8,6 +8,13 @@
 
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+      #list {position: absolute;
+             z-index: 1000;
+             top: 10%;
+             width: 20%;
+             height: 80%;
+             overflow: auto;
+      }
     </style>
 
     <!-- for now this is loaded manually - but will be shimmed into requirejs/rjs later -->
@@ -17,6 +24,14 @@
   <body>
     <h6 id="wait_msg">Loading Google Maps...</h1>
     <div id="map-canvas"></div>
+
+    <div id='list'>
+      <ul>
+	<!-- ko foreach: museums -->
+	<li><span data-bind="text: title"></span></li>
+	<!-- /ko -->
+      </ul>
+    </div>
 
     <script data-main="js/main" src="js/require.js"></script>
   </body>
