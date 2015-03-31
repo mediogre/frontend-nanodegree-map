@@ -1,4 +1,4 @@
-define(['jquery', 'ko', 'gmaps', 'view_model'], function ($, ko, gmaps, viewModel) {
+define(['jquery', 'ko', 'gmaps', 'view_model', 'geo_view_model'], function ($, ko, gmaps, viewModel, geo) {
   $('#wait_msg').hide();
 
   var moscow = new gmaps.LatLng(55.752532, 37.622828);
@@ -43,5 +43,5 @@ define(['jquery', 'ko', 'gmaps', 'view_model'], function ($, ko, gmaps, viewMode
     });
   }
 
-  ko.applyBindings(viewModel);
+  ko.applyBindings(viewModel, $('#list-view')[0]);
 });
