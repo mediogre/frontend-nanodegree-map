@@ -14,6 +14,7 @@
              width: 20%;
              height: 80%;
              overflow: auto;
+      background-color: rgba(111, 111, 111, 0.5);
       }
     </style>
 
@@ -28,7 +29,7 @@
     <div id='list'>
       <ul>
 	<!-- ko foreach: museums -->
-	<li><span data-bind="text: title"></span></li>
+	<li><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
 	<!-- /ko -->
       </ul>
     </div>
