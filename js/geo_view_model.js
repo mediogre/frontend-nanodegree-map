@@ -1,11 +1,10 @@
-define(['ko', 'jquery'], function(ko, $) {
+define(['ko', 'jquery', 'third_party_api'], function(ko, $, third_party) {
   var GeoVM = function() {
 
     this.searchCenter = ko.observable("Moscow");
 
+    this.listOfLocations = ko.observableArray([]);
   };
-
-//  $.getJSON("https://maps.googleapis.com/maps/api/geocode/output?parameters
 
   var vm = new GeoVM();
   ko.applyBindings(vm, $('#geo-view')[0]);

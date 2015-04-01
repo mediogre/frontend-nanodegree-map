@@ -45,6 +45,11 @@
 
     <div id='geo-view'>
       <input data-bind="value: searchCenter">
+      <ul>
+	<!-- ko foreach: listOfLocations -->
+	<li><span data-bind="text: formatted_address"></span></li>
+	<!-- /ko -->
+      </ul>
     </div>
 
     <script data-main="js/main" src="js/require.js"></script>

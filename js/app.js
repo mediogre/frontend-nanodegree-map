@@ -1,4 +1,4 @@
-define(['jquery', 'ko', 'gmaps', 'view_model', 'geo_view_model'], function ($, ko, gmaps, viewModel, geo) {
+define(['jquery', 'ko', 'gmaps', 'view_model', 'geo_view_model', 'third_party_api'], function ($, ko, gmaps, viewModel, geo, third_party) {
   $('#wait_msg').hide();
 
   var moscow = new gmaps.LatLng(55.752532, 37.622828);
@@ -44,4 +44,11 @@ define(['jquery', 'ko', 'gmaps', 'view_model', 'geo_view_model'], function ($, k
   }
 
   ko.applyBindings(viewModel, $('#list-view')[0]);
+
+  third_party.googleGeocoding('Moscow').done(function(x) {
+    geo.listOfLocations.removeAll();
+    for (var i = 0; i < x.length; i++) {
+      geo.listOfLocations.push(x[i]);
+    }
+  });
 });
