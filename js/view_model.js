@@ -1,4 +1,4 @@
-define(['ko'], function(ko) {
+define(['ko', 'gmaps'], function(ko, gmaps) {
   return new (function() {
     var self = this;
 
@@ -9,6 +9,9 @@ define(['ko'], function(ko) {
 
     this.viewMuseum = function(museum) {
       console.log("You clicked " + museum.title);
+      if (museum.marker) {
+        museum.marker.setAnimation(gmaps.Animation.BOUNCE);
+      }
     };
   });
 });
