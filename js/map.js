@@ -16,10 +16,10 @@ define(['gmaps', 'view_model'], function(gmaps, viewModel) {
       position: place.geometry.location
     });
 
-    gmaps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
+    // gmaps.event.addListener(marker, 'click', function() {
+    //   infowindow.setContent(place.name);
+    //   infowindow.open(map, this);
+    // });
 
     return marker;
   }
@@ -39,7 +39,7 @@ define(['gmaps', 'view_model'], function(gmaps, viewModel) {
     };
 
     places.nearbySearch(request, function(results, status) {
-      if (status == gmaps.places.PlacesServiceStatus.OK) {
+      if (status === gmaps.places.PlacesServiceStatus.OK) {
         viewModel.museums.removeAll();
 
         for (var i = 0; i < results.length; i++) {

@@ -1,0 +1,24 @@
+html, body, #map-canvas { 
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#list-view {
+    position: absolute;
+    z-index: 1000;
+    top: 10%;
+    width: 20%;
+    height: 80%;
+    right: 1%;
+    overflow: auto;
+    background-color: rgba(40, 44, 52, 0.5);
+}
+
+#geo-view {
+    position: absolute;
+    top: 1%;
+    z-index: 1;
+    left: 1%;
+    width: 17em;
+}
