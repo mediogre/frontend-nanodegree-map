@@ -13,14 +13,19 @@ define(['ko', 'gmaps'], function(ko, gmaps) {
     });
 
     this.filterMuseums.subscribe(function(value) {
-      if (value != "") {
-        var re = new Regexp(value, 'i');
+      if (value) {
+        var re = new RegExp(value, 'i');
         self.matchedMuseums.removeAll();
-
-        for (var i = 0; i < self.museums.length; i++) {
-          if (self.museums[i].title.match(re)) {
-            self.matchedMuseums.push(self.museums[i]);
+        for (var i = 0; i < self.museums().length; i++) {
+          if (self.museums()[i].title.match(re)) {
+            self.matchedMuseums.push(self.museums()[i]);
           }
+        }
+      } else {
+        // just add them all for now
+        self.matchedMuseums.removeAll();
+        for (var j = 0; j < self.museums().length; j++) {
+          self.matchedMuseums.push(self.museums()[j]);
         }
       }
     });

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Udacity Map</title>
 
-    <link rel="stylesheet" src="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 
     <!-- for now this is loaded manually - but will be shimmed into requirejs/rjs later -->
     <script src="js/lib/jquery-1.11.2.min.js"></script>
@@ -17,24 +17,24 @@
     <div id="map-canvas"></div>
 
     <div id='list-view'>
-<!--      <label>Filter
+      <label>Filter
 	<input data-bind="textInput: filterMuseums">
-      </label> -->
+      </label>
       <ul>
-	<!-- ko foreach: museums -->
+	<!-- ko foreach: matchedMuseums -->
 	<li><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
 	<!-- /ko -->
       </ul>
     </div>
 
-    <!-- <div id='geo-view'> -->
-    <!--   <input data-bind="textInput: searchCenter"> -->
-    <!--   <ul> -->
-    <!-- 	<\!-- ko foreach: listOfLocations -\-> -->
-    <!-- 	<li><span data-bind="text: formatted_address, click: $parent.goToLocation"></span></li> -->
-    <!-- 	<\!-- /ko -\-> -->
-    <!--   </ul> -->
-    <!-- </div> -->
+    <div id='geo-view'>
+      <input data-bind="textInput: searchCenter">
+      <ul>
+    	<!-- ko foreach: listOfLocations -->
+    	<li><span data-bind="text: formatted_address, click: $parent.goToLocation"></span></li>
+    	<!-- /ko -->
+      </ul>
+    </div>
 
     <script data-main="js/main" src="js/lib/require.js"></script>
   </body>
