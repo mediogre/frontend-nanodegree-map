@@ -21,7 +21,7 @@
 	<input data-bind="textInput: filterMuseums">
       </label>
       <ul>
-	<!-- ko foreach: matchedMuseums -->
+	<!-- ko foreach: museums -->
 	<li><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
 	<!-- /ko -->
       </ul>
@@ -34,6 +34,10 @@
     	<li><span data-bind="text: formatted_address, click: $parent.goToLocation"></span></li>
     	<!-- /ko -->
       </ul>
+    </div>
+
+    <div id='wiki-image'>
+      <img data-bind="attr: {src: url}">
     </div>
 
     <script data-main="js/main" src="js/lib/require.js"></script>

@@ -1,4 +1,4 @@
-define(['ko', 'gmaps'], function(ko, gmaps) {
+define(['ko', 'gmaps', 'wiki_image'], function(ko, gmaps, wiki_image) {
   return new (function() {
     var self = this;
 
@@ -38,6 +38,8 @@ define(['ko', 'gmaps'], function(ko, gmaps) {
       if (museum.marker) {
         museum.marker.setAnimation(gmaps.Animation.BOUNCE);
         museum.marker.getMap().panTo(museum.marker.getPosition());
+
+        wiki_image.title(museum.title);
       }
     };
   });
