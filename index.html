@@ -20,9 +20,9 @@
       <label>Filter
 	<input data-bind="textInput: filterMuseums">
       </label>
-      <ul>
+      <ul id='nav'>
 	<!-- ko foreach: museums -->
-	<li><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
+	<li><a data-bind="text: title, click: $parent.viewMuseum"></a></li>
 	<!-- /ko -->
       </ul>
     </div>
