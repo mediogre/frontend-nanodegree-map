@@ -29,6 +29,18 @@ define(['jquery', 'config'], function($, conf) {
     return d.promise();
   }
 
+  // returns URL to street image using Static Street View API
+  function streetImageURL(lat, lng, sizex, sizey) {
+    if (!sizex) {
+      sizex = 200;
+    }
+    if (!sizey) {
+      sizey = 200;
+    }
+
+    return 'https://maps.googleapis.com/maps/api/streetview?size=' + sizex + 'x' + sizey + '&location=' + lat + ',' + lng;
+  }
+
   // get an image from wikipedia based on searchStr
   // a promise is returned which if successul would return
   // an object with title and url of the image
@@ -36,7 +48,7 @@ define(['jquery', 'config'], function($, conf) {
   function wikipediaImages(searchStr) {
     var d = $.Deferred();
 
-    jQuery.ajax({
+    $.ajax({
       url: 'http://en.wikipedia.org/w/api.php',
       type: 'GET',
       dataType: 'jsonp',
@@ -75,7 +87,7 @@ define(['jquery', 'config'], function($, conf) {
       var image = page.images[0];
       var title = image.title;
 
-      jQuery.ajax({
+      $.ajax({
         url: 'http://en.wikipedia.org/w/api.php',
         type: 'GET',
         dataType: 'jsonp',
@@ -130,6 +142,7 @@ define(['jquery', 'config'], function($, conf) {
   // export our third-party API low-level routines
   return {
     googleGeocoding: geocode,
-    wikipediaImages: wikipediaImages
+    wikipediaImages: wikipediaImages,
+    streetImageURL: streetImageURL
   };
 });

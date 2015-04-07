@@ -1,4 +1,4 @@
-define(['ko', 'gmaps', 'wiki_image'], function(ko, gmaps, wiki_image) {
+define(['ko', 'gmaps', 'wiki_image', 'street_image'], function(ko, gmaps, wiki_image, street_image) {
   return new (function() {
     var self = this;
 
@@ -36,10 +36,14 @@ define(['ko', 'gmaps', 'wiki_image'], function(ko, gmaps, wiki_image) {
     this.viewMuseum = function(museum) {
       console.log("You clicked " + museum.title);
       if (museum.marker) {
+        console.log(museum.marker.getPosition());
         museum.marker.setAnimation(gmaps.Animation.BOUNCE);
-        museum.marker.getMap().panTo(museum.marker.getPosition());
+
+        var markerLoc = museum.marker.getPosition();
+        museum.marker.getMap().panTo(markerLoc);
 
         wiki_image.title(museum.title);
+        street_image.location({lat: markerLoc.lat(), lng: markerLoc.lng()});
       }
     };
   });

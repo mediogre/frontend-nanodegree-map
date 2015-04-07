@@ -41,4 +41,8 @@ the spot.
          There should be a filtering function on markers that already show up.
          Simply providing a search function through a third-party API is not enough.
    - [X] Implement a list view of the identified locations.
-   - [ ] Add additional functionality using third-party APIs when a map marker, search result, or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc). If you need a refresher on making AJAX requests to third-party servers, check out our Intro to AJAX course.
+   - [ ] Add additional functionality using third-party APIs
+         when a map marker,
+         search result,
+         or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc). 
+         If you need a refresher on making AJAX requests to third-party servers, check out our Intro to AJAX course.

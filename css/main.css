@@ -1,4 +1,4 @@
-html, body, #map-canvas { 
+html, body, #map-canvas {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -21,4 +21,32 @@ html, body, #map-canvas {
     z-index: 1;
     left: 1%;
     width: 17em;
+}
+
+#street-image {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    z-index: 1;
+    bottom: 1%;
+    left: 1%;
+}
+
+#street-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+#wiki-image {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    z-index: 1;
+    top: 10%;
+    left: 1%;
+}
+
+#wiki-image img {
+    max-width: 100%;
+    height: auto;
 }
