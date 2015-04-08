@@ -13,12 +13,12 @@ ul {
     padding: 0px;
 }
 
-ul#nav li a:hover, ul#nav li.active a {
+ul#nav li span:hover, ul#nav li.active span {
     text-decoration: none;
     background: rgba(147, 154, 161, 0.47);
 }
 
-li a {
+li span {
     padding: 5px;
     margin: 5px;
     width: 100%

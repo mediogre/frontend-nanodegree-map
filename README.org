@@ -46,3 +46,11 @@ the spot.
          search result,
          or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc). 
          If you need a refresher on making AJAX requests to third-party servers, check out our Intro to AJAX course.
+
+
+https://developers.google.com/maps/documentation/javascript/events
+var listener1 = google.maps.event.addListener(marker, 'click', aFunction);
+var listener2 = google.maps.event.addListener(marker, 'mouseover', bFunction);
+
+// Remove listener1 and listener2 from marker instance.
+google.maps.event.clearInstanceListeners(marker);
