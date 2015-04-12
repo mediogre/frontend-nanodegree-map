@@ -1,12 +1,12 @@
-define(['gmaps', 'view_model'], function(gmaps, viewModel) {
-  var moscow = {lat: 55.752532, lng: 37.622828};
-
+define(['gmaps', 'view_model', 'config'], function(gmaps, viewModel, config) {
+  // main map object
   var map = new gmaps.Map(document.getElementById('map-canvas'), {
-    center: moscow,
-    zoom: 15,
+    center: config.defaults.center,
+    zoom: config.defaults.zoom,
     disableDefaultUI: true
   });
 
+  // places service object
   var places = new gmaps.places.PlacesService(map);
 
   function createMarker(place) {
@@ -53,8 +53,6 @@ define(['gmaps', 'view_model'], function(gmaps, viewModel) {
       // TODO: error handling
     });
   }
-
-  changeLocation(moscow.lat, moscow.lng);
 
   return {
     changeLocation: changeLocation

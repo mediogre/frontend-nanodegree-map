@@ -24,11 +24,11 @@ the spot.
   - [ ] stop animations for existing marker(s), when selecting a museum
   - [ ] click on marker and select list view item
   - [ ] once list view item/marker is selected
-    - load a picture
+    - [ ] load a picture
     - load some info
       - wikipedia?
       - g+?
-    - load foursquare venue stuff
+    - [ ] load foursquare venue stuff
 
 
 * Udacity Rubric
@@ -88,3 +88,7 @@ google.maps.event.clearInstanceListeners(marker);
       - use different width per image depending on media query (mobile, tablet, xlarge - steal definitions from bootstrap?)
 
   - finish filtering
+
+  - foursquare image
+
+  - wikipedia data
