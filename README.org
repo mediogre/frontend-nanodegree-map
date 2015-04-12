@@ -44,7 +44,7 @@ the spot.
    - [ ] Add additional functionality using third-party APIs
          when a map marker,
          search result,
-         or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc). 
+         or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc).
          If you need a refresher on making AJAX requests to third-party servers, check out our Intro to AJAX course.
 
 
@@ -54,3 +54,37 @@ var listener2 = google.maps.event.addListener(marker, 'mouseover', bFunction);
 
 // Remove listener1 and listener2 from marker instance.
 google.maps.event.clearInstanceListeners(marker);
+
+* Register for APIs
+  - [X] foursquare
+
+* TODO rough
+  - introduce active museum
+    - activated by a click on marker
+    - activated by clicking list item as well
+
+    - when active museum is selected:
+      - previous active (if any) should lose activity
+        - no bouncing (if there was any)
+        - no "boldness"
+	- its data should get lost
+	  - images disappear
+	    - streetview
+	    - foursquare
+	    - wikiimage
+	  - wiki data should disappear as well
+      - marker must bounce on activation
+      - show this activity as "bold" font or something
+      - streetview shows loading
+      - foursquare shows loading
+      - streetview shows loading
+      - when loaded images appear
+      - if not loaded - brief "error" message appears in the corresponding divs
+
+  - make sure responsiveness is there
+    - create breakpoints if needed?
+      - show images (from APIs) vertically if portrait?
+      - show images horizontally in landscape?
+      - use different width per image depending on media query (mobile, tablet, xlarge - steal definitions from bootstrap?)
+
+  - finish filtering
