@@ -33,7 +33,14 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
     // this is LatLng of the map center
     self.mapCenter = ko.whatever;
 
+    this.active = null;
+
     this.viewMuseum = function(museum) {
+      if (self.active) {
+        // deactivate
+        self.active.marker.setAnimation(null);
+      }
+
       console.log("You clicked " + museum.title);
       if (museum.marker) {
         console.log(museum.marker.getPosition());
@@ -46,6 +53,8 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
         streetImage.location({lat: markerLoc.lat(), lng: markerLoc.lng()});
         fourSquareImage.location(markerLoc.lat(), markerLoc.lng());
       }
+
+      self.active = museum;
     };
   });
 });
