@@ -2,7 +2,7 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
   return silly('list-view', function() {
     var self = this;
 
-    self.museums = ko.observableArray([]);
+    self.museums = ko.observableArray([]).extend({ notify: 'always' });
     self.matchedMuseums = ko.observableArray([]);
 
     this.filterMuseums = ko.observable("").extend({
@@ -34,7 +34,22 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
     self.mapCenter = ko.whatever;
 
     this.active = null;
+    this.hovered_ = null;
 
+    this.setHovered = function(m) {
+      console.log("Setting hovered: ", m);
+      self.hovered_ = m;
+      self.museums.valueHasMutated();
+    };
+
+    this.hovered = ko.pureComputed(function(museum) {
+      console.log("Hovered computed called:", museum);
+      if (self.hovered_ === museum) {
+        return 'active';
+      }
+      return '';
+    });
+    
     this.viewMuseum = function(museum) {
       if (self.active) {
         // deactivate

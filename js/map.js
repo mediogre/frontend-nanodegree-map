@@ -46,7 +46,16 @@ define(['gmaps', 'list_vm', 'config'], function(gmaps, listViewModel, config) {
           var place = results[i];
           var marker = createMarker(results[i]);
 
-          listViewModel.museums.push({title: place.name, marker: marker});
+          var m = (function () {
+            var museum = {title: place.name, marker: marker};
+            gmaps.event.addListener(marker, 'mouseover',
+                                    function() {
+                                      listViewModel.setHovered(museum);
+                                    });
+            return museum;
+          })();
+          
+          listViewModel.museums.push(m);
         }
       }
 
