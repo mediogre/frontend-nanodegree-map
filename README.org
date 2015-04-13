@@ -34,12 +34,11 @@ the spot.
         we should start from empty museums list in all cases
   - [ ] stop animations for existing marker(s), when selecting a museum
   - [ ] click on marker and select list view item
-  - [ ] once list view item/marker is selected
-    - [ ] load a picture
+  - [X] once list view item/marker is selected
+    - [X] load a picture
     - load some info
       - wikipedia?
-      - g+?
-    - [ ] load foursquare venue stuff
+    - [X] load foursquare venue stuff
 
 
 * Udacity Rubric
@@ -111,7 +110,7 @@ google.maps.event.clearInstanceListeners(marker);
 
   - finish filtering
 
-  - foursquare image
+  - [X] foursquare image
 
   - wikipedia data
 

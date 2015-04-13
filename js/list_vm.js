@@ -1,7 +1,5 @@
-define(['ko', 'jquery',
-        'gmaps', 'wiki_image',
-        'street_image', 'foursquare_image'], function(ko, $, gmaps, wikiImage, streetImage, fourSquareImage) {
-  var PlacesVM = function() {
+define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pattern'], function(ko, gmaps, wikiImage, streetImage, fourSquareImage, silly) {
+  return silly('list-view', function() {
     var self = this;
 
     self.museums = ko.observableArray([]);
@@ -49,9 +47,5 @@ define(['ko', 'jquery',
         fourSquareImage.location(markerLoc.lat(), markerLoc.lng());
       }
     };
-  };
-
-  var vm = new PlacesVM();
-  ko.applyBindings(vm, $('#list-view')[0]);
-  return vm;
+  });
 });

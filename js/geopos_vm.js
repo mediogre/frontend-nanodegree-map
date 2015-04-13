@@ -1,5 +1,5 @@
-define(['ko', 'jquery', 'third_party_api', 'map'], function(ko, $, api, map) {
-  var GeoVM = function() {
+define(['ko', 'third_party_api', 'map', 'silly_pattern'], function(ko, api, map, silly) {
+  return silly('geo-view', function() {
     var self = this;
 
     this.searchCenter = ko.observable("Moscow").extend({
@@ -24,10 +24,5 @@ define(['ko', 'jquery', 'third_party_api', 'map'], function(ko, $, api, map) {
     this.goToLocation = function(geoLocation) {
       map.changeLocation(geoLocation.location.lat, geoLocation.location.lng);
     };
-  };
-
-  var vm = new GeoVM();
-  ko.applyBindings(vm, $('#geo-view')[0]);
-
-  return vm;
+  });
 });
