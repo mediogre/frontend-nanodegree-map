@@ -1,4 +1,4 @@
-define(['gmaps', 'view_model', 'config'], function(gmaps, viewModel, config) {
+define(['gmaps', 'list_vm', 'config'], function(gmaps, listViewModel, config) {
   // main map object
   var map = new gmaps.Map(document.getElementById('map-canvas'), {
     center: config.defaults.center,
@@ -40,13 +40,13 @@ define(['gmaps', 'view_model', 'config'], function(gmaps, viewModel, config) {
 
     places.nearbySearch(request, function(results, status) {
       if (status === gmaps.places.PlacesServiceStatus.OK) {
-        viewModel.museums.removeAll();
+        listViewModel.museums.removeAll();
 
         for (var i = 0; i < results.length; i++) {
           var place = results[i];
           var marker = createMarker(results[i]);
 
-          viewModel.museums.push({title: place.name, marker: marker});
+          listViewModel.museums.push({title: place.name, marker: marker});
         }
       }
 

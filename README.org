@@ -15,6 +15,17 @@ once the apps loads it assumes that GoogleMaps API has been properly loaded,
 and if not, the app is not even started, instead a simple error reporting is done on
 the spot.
 
+** Flow of control/events
+1. Hard-dependencies (jquery, ko, google maps api) are loaded and any error are reported
+2. app.js is "required".
+3. It in turn:
+   - initializes full-screen map
+   - initializes PlacesViewModel
+   - initializes GeopositionViewmodel
+   - sets initial location (Moscow)
+4. Each viewmodel makes sure to apply bindings to its own "view".
+
+
 * References
 - Idea of gluing modules came from this http://stackoverflow.com/a/28466452/404328
 
@@ -80,6 +91,7 @@ google.maps.event.clearInstanceListeners(marker);
       - streetview shows loading
       - when loaded images appear
       - if not loaded - brief "error" message appears in the corresponding divs
+  - hovering over a marker should make "active" the corresponding list item
 
   - make sure responsiveness is there
     - create breakpoints if needed?
@@ -92,3 +104,13 @@ google.maps.event.clearInstanceListeners(marker);
   - foursquare image
 
   - wikipedia data
+
+  - selecting markers by keyboard would be slick?
+    - assign 1, 2, 3, 4, 5 to first markers
+      - shows those numbers in both markers and list view
+      - numbers are to be affected by filtering and changes to places
+
+      - numbers are assigned dynamically?
+	- when filtered list is rebuilt
+
+      - custom layering to draw "digits"?
