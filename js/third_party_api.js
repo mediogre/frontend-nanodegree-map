@@ -6,7 +6,7 @@
 // or be notified of the error.
 // All the details of underlying API, parsing, etc is this utility function's job
 // and we don't want any part of that
-define(['jquery', 'config'], function($, conf) {
+define(['jquery', 'config'], function($, config) {
 
   // Google geocoding API
   function geocode(searchStr) {
@@ -63,8 +63,6 @@ define(['jquery', 'config'], function($, conf) {
         'Api-User-Agent': 'UdacityMapper/1.0'
       }
     }).done(function(json) {
-      // console.log(json);
-
       var page;
       for (var k in json.query.pages) {
         if (json.query.pages.hasOwnProperty(k)) {
@@ -73,7 +71,6 @@ define(['jquery', 'config'], function($, conf) {
         }
       }
 
-      // console.log(page);
       if (! page) {
         d.reject("Could not find any wikipedia page");
         return;
@@ -102,8 +99,6 @@ define(['jquery', 'config'], function($, conf) {
           'Api-User-Agent': 'UdacityMapper/1.0'
         }
       }).done(function(json) {
-        // console.log(json);
-
         var page;
         for (var k in json.query.pages) {
           if (json.query.pages.hasOwnProperty(k)) {
@@ -129,20 +124,70 @@ define(['jquery', 'config'], function($, conf) {
 
     return d.promise();
   }
-  // g+
 
   // foursquare
+  function fourSquare(lat, lng, imageWidth, imageHeight) {
+    if (!imageWidth) {
+      imageWidth = 200;
+    }
 
-  // meetup
+    if (!imageHeight) {
+      imageHeight = 200;
+    }
 
-  // flickr?
+    var d = $.Deferred();
 
-  // yelp?
+    $.getJSON('https://api.foursquare.com/v2/venues/search',
+              {ll: lat + ',' + lng,
+               oauth_token: config.fourSquareToken,
+               v: '20150413',
+               limit: 1
+              }).done(function(response) {
+                console.log(response);
+                if ( !(response.meta && response.meta.code === 200)) {
+                  d.reject("Foursquare search failed");
+                  return;
+                }
+
+                if (! (response.response.venues && response.response.venues instanceof Array && response.response.venues.length > 0)) {
+                  d.reject("Foursquare search returned no venues");
+                  return;
+                }
+
+                var venue = response.response.venues[0];
+
+                $.getJSON('https://api.foursquare.com/v2/venues/' + venue.id + '/photos',
+                          {oauth_token: config.fourSquareToken,
+                           v: '20150413',
+                           limit: 1
+                          }).done(function(response) {
+                            if ( !(response.meta && response.meta.code === 200)) {
+                              d.reject("Foursquare Photos search failed");
+                              return;
+                            }
+
+                            if (response.response.photos.count <= 0) {
+                              d.reject("No photos from FourSquare");
+                              return;
+                            }
+
+                            var image = response.response.photos.items[0];
+                            d.resolve({url: image.prefix + imageWidth + 'x' + imageHeight + image.suffix});
+                         }).fail(function() {
+                           d.reject("Four Square Photos Error");
+                         });
+    }).fail(function() {
+      d.reject("Four Square Error");
+    });
+
+    return d.promise();
+  }
 
   // export our third-party API low-level routines
   return {
     googleGeocoding: geocode,
     wikipediaImages: wikipediaImages,
-    streetImageURL: streetImageURL
+    streetImageURL: streetImageURL,
+    fourSquare: fourSquare
   };
 });

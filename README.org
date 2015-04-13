@@ -70,6 +70,16 @@ google.maps.event.clearInstanceListeners(marker);
   - [X] foursquare
 
 * TODO rough
+  - create 3 images strip
+    - wiki
+    - streetview
+    - foursquare
+
+    - they should always show something - like "Loading" or "No image"
+    - show errors?
+    - show them vertically if device is "vertical"
+    - show them horizontally if device is "horizontal"
+
   - introduce active museum
     - activated by a click on marker
     - activated by clicking list item as well

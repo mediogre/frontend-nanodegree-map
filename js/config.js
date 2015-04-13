@@ -8,6 +8,8 @@ define(function() {
 
       // default zoom level
       zoom: 15
-    }
+    },
+
+    fourSquareToken: 'KYYBOHEBI2LNNRBNAMYHYPSL0LTDM1LYYYJEWVGVVNDLA0AA'
   };
 });

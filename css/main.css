@@ -70,3 +70,12 @@ li span {
     max-width: 100%;
     height: auto;
 }
+
+#images {
+    background-color: rgba(200, 200, 200, 0.45);
+    width: 20%;
+    height: 60%;
+    position: absolute;
+    left: 10%;
+    top: 20%;
+}
