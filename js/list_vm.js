@@ -39,17 +39,20 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
     this.setHovered = function(m) {
       console.log("Setting hovered: ", m);
       self.hovered_ = m;
-      self.museums.valueHasMutated();
+      self.museums.push(self.museums.pop());
+//      self.museums.valueHasMutated();
+        //      console.log("Hovered:" , self.hovered(m).peek());
     };
 
-    this.hovered = ko.pureComputed(function(museum) {
+    this.hovered = function(index) {
+      var museum = self.museums()[index()];
       console.log("Hovered computed called:", museum);
       if (self.hovered_ === museum) {
         return 'active';
       }
       return '';
-    });
-    
+    };
+
     this.viewMuseum = function(museum) {
       if (self.active) {
         // deactivate
