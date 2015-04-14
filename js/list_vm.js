@@ -33,14 +33,13 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
     // this is LatLng of the map center
     self.mapCenter = ko.whatever;
 
-    this.active = null;
+    this.active_ = null;
     this.hovered_ = null;
 
     this.setHovered = function(m) {
       console.log("Setting hovered: ", m);
       self.hovered_ = m;
       self.museums.valueHasMutated();
-        //      console.log("Hovered:" , self.hovered(m).peek());
     };
 
     this.hovered = function(index, element) {
@@ -54,9 +53,9 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
     };
 
     this.viewMuseum = function(museum) {
-      if (self.active) {
+      if (self.active_) {
         // deactivate
-        self.active.marker.setAnimation(null);
+        self.active_.marker.setAnimation(null);
       }
 
       console.log("You clicked " + museum.title);
@@ -73,7 +72,7 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
         fourSquareImage.location(markerLoc.lat(), markerLoc.lng());
       }
 
-      self.active = museum;
+      self.active_ = museum;
     };
   });
 });
