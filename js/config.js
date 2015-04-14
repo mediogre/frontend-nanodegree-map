@@ -10,6 +10,9 @@ define(function() {
       zoom: 15
     },
 
-    fourSquareToken: 'KYYBOHEBI2LNNRBNAMYHYPSL0LTDM1LYYYJEWVGVVNDLA0AA'
+    fourSquareToken: 'KYYBOHEBI2LNNRBNAMYHYPSL0LTDM1LYYYJEWVGVVNDLA0AA',
+
+    // time in milliseconds to stop happy marker bouncing
+    bounceTime: 1500
   };
 });

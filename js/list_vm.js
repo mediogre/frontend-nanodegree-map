@@ -1,4 +1,4 @@
-define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pattern'], function(ko, gmaps, wikiImage, streetImage, fourSquareImage, silly) {
+define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pattern', 'config'], function(ko, gmaps, wikiImage, streetImage, fourSquareImage, silly, config) {
   return silly('list-view', function() {
     var self = this;
 
@@ -39,15 +39,15 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
     this.setHovered = function(m) {
       console.log("Setting hovered: ", m);
       self.hovered_ = m;
-      self.museums.push(self.museums.pop());
-//      self.museums.valueHasMutated();
+      self.museums.valueHasMutated();
         //      console.log("Hovered:" , self.hovered(m).peek());
     };
 
-    this.hovered = function(index) {
+    this.hovered = function(index, element) {
       var museum = self.museums()[index()];
       console.log("Hovered computed called:", museum);
       if (self.hovered_ === museum) {
+        element.scrollIntoView();
         return 'active';
       }
       return '';
@@ -63,6 +63,7 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
       if (museum.marker) {
         console.log(museum.marker.getPosition());
         museum.marker.setAnimation(gmaps.Animation.BOUNCE);
+        setTimeout(function() {museum.marker.setAnimation(null);}, config.bounceTime);
 
         var markerLoc = museum.marker.getPosition();
         museum.marker.getMap().panTo(markerLoc);

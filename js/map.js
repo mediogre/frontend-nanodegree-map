@@ -48,13 +48,21 @@ define(['gmaps', 'list_vm', 'config'], function(gmaps, listViewModel, config) {
 
           var m = (function () {
             var museum = {title: place.name, marker: marker};
+
+            // TODO: save listners into museum object itself
+            // TODO: then we can dispose them when museums are removed (when geo position changes)
             gmaps.event.addListener(marker, 'mouseover',
                                     function() {
                                       listViewModel.setHovered(museum);
                                     });
+
+            gmaps.event.addListener(marker, 'click',
+                                    function () {
+                                      listViewModel.viewMuseum(museum);
+                                    });
             return museum;
           })();
-          
+
           listViewModel.museums.push(m);
         }
       }

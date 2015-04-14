@@ -22,7 +22,7 @@
       </label>
       <ul id='nav'>
 	<!-- ko foreach: museums -->
-	<li data-bind="css: $parent.hovered($index)"><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
+	<li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
 	<!-- /ko -->
       </ul>
     </div>
