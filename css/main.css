@@ -71,6 +71,20 @@ li span {
     height: auto;
 }
 
+#foursquare-image {
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    z-index: 1;
+    bottom: 34%;
+    left: 1%;
+}
+
+#foursquare-image img {
+    max-width: 100%;
+    height: auto;
+}
+
 #images {
     background-color: rgba(200, 200, 200, 0.45);
     width: 20%;

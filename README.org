@@ -80,13 +80,13 @@ google.maps.event.clearInstanceListeners(marker);
     - show them horizontally if device is "horizontal"
 
   - introduce active museum
-    - activated by a click on marker
-    - activated by clicking list item as well
+    - [X] activated by a click on marker
+    - [X] activated by clicking list item as well
 
     - when active museum is selected:
       - previous active (if any) should lose activity
-        - no bouncing (if there was any)
-        - no "boldness"
+        - [X] no bouncing (if there was any)
+        - [X] no "boldness"
 	- its data should get lost
 	  - images disappear
 	    - streetview
