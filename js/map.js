@@ -1,4 +1,4 @@
-define(['gmaps', 'list_vm', 'config'], function(gmaps, listViewModel, config) {
+define(['gmaps', 'list_vm', 'config', 'map_item'], function(gmaps, listViewModel, config, MapItem) {
   // main map object
   var map = new gmaps.Map(document.getElementById('map-canvas'), {
     center: config.defaults.center,
@@ -8,21 +8,6 @@ define(['gmaps', 'list_vm', 'config'], function(gmaps, listViewModel, config) {
 
   // places service object
   var places = new gmaps.places.PlacesService(map);
-
-  function createMarker(place) {
-    var placeLoc = place.geometry.location;
-    var marker = new gmaps.Marker({
-      map: map,
-      position: place.geometry.location
-    });
-
-    // gmaps.event.addListener(marker, 'click', function() {
-    //   infowindow.setContent(place.name);
-    //   infowindow.open(map, this);
-    // });
-
-    return marker;
-  }
 
   function changeLocation(lat, lng, radius) {
     if (!radius) {
@@ -44,23 +29,15 @@ define(['gmaps', 'list_vm', 'config'], function(gmaps, listViewModel, config) {
 
         for (var i = 0; i < results.length; i++) {
           var place = results[i];
-          var marker = createMarker(results[i]);
-
           var m = (function () {
-            var museum = {title: place.name, marker: marker};
-
-            // TODO: save listners into museum object itself
-            // TODO: then we can dispose them when museums are removed (when geo position changes)
-            gmaps.event.addListener(marker, 'mouseover',
-                                    function() {
-                                      listViewModel.setHovered(museum);
-                                    });
-
-            gmaps.event.addListener(marker, 'click',
-                                    function () {
-                                      listViewModel.viewMuseum(museum);
-                                    });
-            return museum;
+            var item = new MapItem(map, place,
+                                   function() {
+                                     listViewModel.setHovered(item);
+                                   },
+                                   function() {
+                                     listViewModel.viewMuseum(item);
+                                   });
+            return item;
           })();
 
           listViewModel.museums.push(m);

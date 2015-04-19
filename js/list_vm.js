@@ -62,7 +62,9 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
       if (museum.marker) {
         console.log(museum.marker.getPosition());
         museum.marker.setAnimation(gmaps.Animation.BOUNCE);
-        setTimeout(function() {museum.marker.setAnimation(null);}, config.bounceTime);
+        setTimeout(function() {
+          museum.hideMarker();
+        }, config.bounceTime);
 
         var markerLoc = museum.marker.getPosition();
         museum.marker.getMap().panTo(markerLoc);
