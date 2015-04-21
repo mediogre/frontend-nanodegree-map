@@ -1,4 +1,4 @@
-define(['gmaps', 'list_vm', 'config', 'map_item', 'third_party_api'], function(gmaps, listViewModel, config, MapItem, api) {
+define(['gmaps', 'list_vm', 'config', 'map_item', 'third_party_api', 'growl'], function(gmaps, listViewModel, config, MapItem, api, growl) {
   // main map object
   var map = new gmaps.Map(document.getElementById('map-canvas'), {
     center: config.defaults.center,
@@ -13,12 +13,6 @@ define(['gmaps', 'list_vm', 'config', 'map_item', 'third_party_api'], function(g
 
     var location = {lat: lat, lng: lng};
     map.setCenter(location);
-
-    var request = {
-      location: location,
-      radius: radius,
-      types: ['museum']
-    };
 
     api.gmapPlaces(location, radius, ['museum'], map).done(function(foundPlaces) {
       listViewModel.museums.removeAll();
@@ -39,8 +33,7 @@ define(['gmaps', 'list_vm', 'config', 'map_item', 'third_party_api'], function(g
         listViewModel.museums.push(m);
       }
     }).fail(function(errorMsg) {
-      // TODO: show error message
-      console.log("Places API Error: " + errorMsg);
+      growl.error({title: "Places API Error", message: errorMsg});
     });
   }
 

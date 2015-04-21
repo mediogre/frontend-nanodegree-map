@@ -28,6 +28,7 @@ the spot.
 
 * References
 - Idea of gluing modules came from this http://stackoverflow.com/a/28466452/404328
+- jquery-growl (https://github.com/ksylvest/jquery-growl) - used for displaying error messages, warnings, etc
 
 * TODO
   - [ ] clear current museums even if places finds nothing - that is when we change location,

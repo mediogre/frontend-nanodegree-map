@@ -34,6 +34,7 @@ define(['jquery', 'gmaps', 'config'], function($, gmaps, config) {
     placesService_.nearbySearch(request, function(results, status) {
       if (status === gmaps.places.PlacesServiceStatus.OK) {
         // parse and resolve
+        d.reject("Our Message Mock");
         d.resolve(results);
       } else {
         // reject with error message/status
