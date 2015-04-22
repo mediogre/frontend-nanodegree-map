@@ -2,7 +2,7 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
   return silly('list-view', function() {
     var self = this;
 
-    self.museums = ko.observableArray([]).extend({ notify: 'always' });
+    self.items = ko.observableArray([]).extend({ notify: 'always' });
     self.matchedMuseums = ko.observableArray([]);
 
     this.filterMuseums = ko.observable("").extend({
@@ -16,22 +16,19 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
       if (value) {
         var re = new RegExp(value, 'i');
         self.matchedMuseums.removeAll();
-        for (var i = 0; i < self.museums().length; i++) {
-          if (self.museums()[i].title.match(re)) {
-            self.matchedMuseums.push(self.museums()[i]);
+        for (var i = 0; i < self.items().length; i++) {
+          if (self.items()[i].title.match(re)) {
+            self.matchedMuseums.push(self.items()[i]);
           }
         }
       } else {
         // just add them all for now
         self.matchedMuseums.removeAll();
-        for (var j = 0; j < self.museums().length; j++) {
-          self.matchedMuseums.push(self.museums()[j]);
+        for (var j = 0; j < self.items().length; j++) {
+          self.matchedMuseums.push(self.items()[j]);
         }
       }
     });
-
-    // this is LatLng of the map center
-    self.mapCenter = ko.whatever;
 
     this.active_ = null;
     this.hovered_ = null;
@@ -39,11 +36,11 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
     this.setHovered = function(m) {
       console.log("Setting hovered: ", m);
       self.hovered_ = m;
-      self.museums.valueHasMutated();
+      self.items.valueHasMutated();
     };
 
     this.hovered = function(index, element) {
-      var museum = self.museums()[index()];
+      var museum = self.items()[index()];
       console.log("Hovered computed called:", museum);
       if (self.hovered_ === museum) {
         element.scrollIntoView();
@@ -52,22 +49,22 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
       return '';
     };
 
-    this.viewMuseum = function(museum) {
+    this.chooseItem = function(item) {
       if (self.active_) {
         self.active_.deactivate();
       }
 
-      console.log("You clicked " + museum.title);
-      if (museum.marker) {
-        console.log(museum.marker.getPosition());
-        museum.activate();
+      console.log("You clicked " + item.title);
+      if (item.marker) {
+        console.log(item.marker.getPosition());
+        item.activate();
 
-        wikiImage.title(museum.title);
-        streetImage.location({lat: museum.lat, lng: museum.lng});
-        fourSquareImage.location(museum.lat, museum.lng);
+        wikiImage.title(item.title);
+        streetImage.location({lat: item.lat, lng: item.lng});
+        fourSquareImage.location(item.lat, item.lng);
       }
 
-      self.active_ = museum;
+      self.active_ = item;
     };
 
     this.changeLocation = function(lat, lng, radius) {
@@ -81,7 +78,7 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
       api.gmapPlaces(location, radius, ['museum']).fail(function(errorMsg) {
         growl.error({title: "Places API Error", message: errorMsg});
       }).done(function(foundPlaces) {
-        self.museums.removeAll();
+        self.items.removeAll();
 
         for (var i = 0; i < foundPlaces.length; i++) {
           var place = foundPlaces[i];
@@ -96,7 +93,7 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
             return item;
           })();
 
-          self.museums.push(m);
+          self.items.push(m);
         }
       });
     };

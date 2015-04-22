@@ -23,8 +23,8 @@
 	<input data-bind="textInput: filterMuseums">
       </label>
       <ul id='nav'>
-	<!-- ko foreach: museums -->
-	<li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.viewMuseum"></span></li>
+	<!-- ko foreach: items -->
+	<li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.chooseItem"></span></li>
 	<!-- /ko -->
       </ul>
     </div>
