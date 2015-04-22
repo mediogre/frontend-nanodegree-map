@@ -78,7 +78,7 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
       var location = {lat: lat, lng: lng};
       map.setCenter(location);
 
-      api.gmapPlaces(location, radius, ['museum'], map).fail(function(errorMsg) {
+      api.gmapPlaces(location, radius, ['museum']).fail(function(errorMsg) {
         growl.error({title: "Places API Error", message: errorMsg});
       }).done(function(foundPlaces) {
         self.museums.removeAll();
