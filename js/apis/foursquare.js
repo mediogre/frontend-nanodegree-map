@@ -17,7 +17,6 @@ define(['jquery', 'config'], function($, config) {
                v: '20150413',
                limit: 1
               }).done(function(response) {
-                console.log(response);
                 if ( !(response.meta && response.meta.code === 200)) {
                   d.reject("Foursquare search failed");
                   return;

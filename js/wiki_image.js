@@ -1,7 +1,7 @@
-define(['ko', 'third_party_api', 'silly_pattern'], function(ko, api, silly) {
+define(['ko', 'third_party_api', 'silly_pattern', 'growl'], function(ko, api, silly, growl) {
   return silly('wiki-image', function() {
     var self = this;
-    
+
     this.title = ko.observable();
     this.url   = ko.observable();
 
@@ -9,8 +9,9 @@ define(['ko', 'third_party_api', 'silly_pattern'], function(ko, api, silly) {
       api.wikipediaImages(v).done(function(obj) {
         self.url(obj.url);
       }).fail(function(msg) {
-        // TODO: show error/fail message
+        self.url(null);
+        growl.error({title: 'Wikipedia Image Error', message: msg});
       });
-    });    
+    });
   });
 });

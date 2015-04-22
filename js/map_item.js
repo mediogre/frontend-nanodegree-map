@@ -17,16 +17,6 @@ define(['gmaps', 'config'], function(gmaps, config) {
     }
   };
 
-  MapItem.prototype.hideMarker = function() {
-    this.marker.setAnimation(null);
-    this.marker.setVisible(false);
-
-    var self = this;
-    setTimeout(function() {
-      self.marker.setVisible(true);
-    }, 1000);
-  };
-
   MapItem.prototype.deactivate = function() {
     this.marker.setAnimation(null);
   };
@@ -36,11 +26,20 @@ define(['gmaps', 'config'], function(gmaps, config) {
     this.marker.setAnimation(gmaps.Animation.BOUNCE);
 
     setTimeout(function() {
-      self.hideMarker();
+      self.marker.setAnimation(null);
     }, config.bounceTime);
 
     var markerLoc = this.marker.getPosition();
     this.marker.getMap().panTo(markerLoc);
+  };
+
+  MapItem.prototype.show = function() {
+    this.marker.setVisible(true);
+  };
+
+  MapItem.prototype.hide = function() {
+    this.marker.setAnimation(null);
+    this.marker.setVisible(false);
   };
 
   return MapItem;

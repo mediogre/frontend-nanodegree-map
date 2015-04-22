@@ -20,10 +20,10 @@
 
     <div id='list-view'>
       <label>Filter
-	<input data-bind="textInput: filterMuseums">
+	<input data-bind="textInput: filter">
       </label>
       <ul id='nav'>
-	<!-- ko foreach: items -->
+	<!-- ko foreach: matchedItems -->
 	<li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.chooseItem"></span></li>
 	<!-- /ko -->
       </ul>

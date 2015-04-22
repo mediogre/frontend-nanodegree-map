@@ -3,60 +3,74 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
     var self = this;
 
     self.items = ko.observableArray([]).extend({ notify: 'always' });
-    self.matchedMuseums = ko.observableArray([]);
+    self.matchedItems = ko.observableArray([]);
 
-    this.filterMuseums = ko.observable("").extend({
+    this.filter = ko.observable("").extend({
       rateLimit: {
-        timeout: 1000,
+        timeout: 250,
         method: "notifyWhenChangesStop"
       }
     });
 
-    this.filterMuseums.subscribe(function(value) {
+    this.filter.subscribe(function(value) {
+      var i, l, item;
       if (value) {
         var re = new RegExp(value, 'i');
-        self.matchedMuseums.removeAll();
-        for (var i = 0; i < self.items().length; i++) {
-          if (self.items()[i].title.match(re)) {
-            self.matchedMuseums.push(self.items()[i]);
+        self.matchedItems.removeAll();
+        for (i = 0, l = self.items().length; i < l; i++) {
+          item = self.items()[i];
+          if (item.title.match(re)) {
+            self.matchedItems.push(item);
+            item.show();
+          } else {
+            item.hide();
           }
         }
       } else {
         // just add them all for now
-        self.matchedMuseums.removeAll();
-        for (var j = 0; j < self.items().length; j++) {
-          self.matchedMuseums.push(self.items()[j]);
+        self.matchedItems.removeAll();
+        for (i = 0, l = self.items().length; i < l; i++) {
+          item = self.items()[i];
+          self.matchedItems.push(item);
+          item.show();
         }
       }
+
+      self.clearActive();
     });
 
     this.active_ = null;
     this.hovered_ = null;
 
     this.setHovered = function(m) {
-      console.log("Setting hovered: ", m);
       self.hovered_ = m;
-      self.items.valueHasMutated();
+      self.matchedItems.valueHasMutated();
     };
 
     this.hovered = function(index, element) {
-      var museum = self.items()[index()];
-      console.log("Hovered computed called:", museum);
-      if (self.hovered_ === museum) {
+      var item = self.matchedItems()[index()];
+      if (self.hovered_ === item) {
         element.scrollIntoView();
         return 'active';
       }
       return '';
     };
 
-    this.chooseItem = function(item) {
+    this.clearActive = function() {
       if (self.active_) {
         self.active_.deactivate();
-      }
+        self.active_ = null;
 
-      console.log("You clicked " + item.title);
+        wikiImage.url(null);
+        streetImage.url(null);
+        fourSquareImage.url(null);
+      }
+    };
+
+    this.chooseItem = function(item) {
+      self.clearActive();
+
       if (item.marker) {
-        console.log(item.marker.getPosition());
         item.activate();
 
         wikiImage.title(item.title);
@@ -79,6 +93,8 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
         growl.error({title: "Places API Error", message: errorMsg});
       }).done(function(foundPlaces) {
         self.items.removeAll();
+        self.matchedItems.removeAll();
+        self.clearActive();
 
         for (var i = 0; i < foundPlaces.length; i++) {
           var place = foundPlaces[i];
@@ -88,12 +104,13 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
                                      self.setHovered(item);
                                    },
                                    function() {
-                                     self.viewMuseum(item);
+                                     self.chooseItem(item);
                                    });
             return item;
           })();
 
           self.items.push(m);
+          self.filter.valueHasMutated();
         }
       });
     };
