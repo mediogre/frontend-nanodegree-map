@@ -1,9 +1,9 @@
 define(['jquery',
-        'config', 'map',
+        'config',
         'list_vm', 'geopos_vm'
        ],
-       function ($, config, map) {
+       function ($, config, lvm) {
          $('#wait_msg').hide();
 
-         map.changeLocation(config.defaults.center.lat, config.defaults.center.lng);
+         lvm.changeLocation(config.defaults.center.lat, config.defaults.center.lng);
        });

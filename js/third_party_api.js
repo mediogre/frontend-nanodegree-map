@@ -6,48 +6,7 @@
 // or be notified of the error.
 // All the details of underlying API, parsing, etc is this utility function's job
 // and we don't want any part of that
-define(['jquery', 'gmaps', 'config'], function($, gmaps, config) {
-  // private data of gmapPlaces - a PlacesService instance
-  var placesService_;
-
-  // private data of error reporting code for PlacesService
-  var placesErrorCodes_ = {};
-  placesErrorCodes_[gmaps.places.PlacesServiceStatus.INVALID_REQUEST] = 'This request was invalid.';
-  placesErrorCodes_[gmaps.places.PlacesServiceStatus.OVER_QUERY_LIMIT] = 'The application has gone over its request quota.';
-  placesErrorCodes_[gmaps.places.PlacesServiceStatus.REQUEST_DENIED] = 'The application is not allowed to use the PlacesService.';
-  placesErrorCodes_[gmaps.places.PlacesServiceStatus.UNKNOWN_ERROR] = 'The PlacesService request could not be processed due to a server error. The request may succeed if you try again.';
-  placesErrorCodes_[gmaps.places.PlacesServiceStatus.ZERO_RESULTS] = 'No result was found for this request.';
-
-  // Google Map Places API
-  var gmapPlaces = function(location, radius, types, map) {
-    if (!placesService_) {
-      placesService_ = new gmaps.places.PlacesService(map);
-    }
-
-    var request = {
-      location: location,
-      radius: radius,
-      types: types
-    };
-
-    var d = $.Deferred();
-    placesService_.nearbySearch(request, function(results, status) {
-      if (status === gmaps.places.PlacesServiceStatus.OK) {
-        // parse and resolve
-        d.reject("Our Message Mock");
-        d.resolve(results);
-      } else {
-        // reject with error message/status
-        var errorMessage = placesErrorCodes_[status];
-        if (! errorMessage) {
-          errorMessage = 'Unknown PlacesService error';
-        }
-        d.reject(errorMessage);
-      }
-    });
-    return d.promise();
-  };
-
+define(['jquery', 'config', 'apis/places'], function($, config, gmapPlaces) {
   // Google geocoding API
   function geocode(searchStr) {
     var d = $.Deferred();

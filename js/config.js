@@ -7,7 +7,10 @@ define(function() {
       center:  {lat: 55.752532, lng: 37.622828},
 
       // default zoom level
-      zoom: 15
+      zoom: 15,
+
+      // used as a default radius (in meters) for nearbysearch in Places API
+      radius: 1500
     },
 
     fourSquareToken: 'KYYBOHEBI2LNNRBNAMYHYPSL0LTDM1LYYYJEWVGVVNDLA0AA',

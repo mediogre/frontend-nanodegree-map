@@ -1,4 +1,4 @@
-define(['ko', 'third_party_api', 'map', 'silly_pattern'], function(ko, api, map, silly) {
+define(['ko', 'third_party_api', 'list_vm', 'silly_pattern'], function(ko, api, lvm, silly) {
   return silly('geo-view', function() {
     var self = this;
 
@@ -22,7 +22,7 @@ define(['ko', 'third_party_api', 'map', 'silly_pattern'], function(ko, api, map,
     });
 
     this.goToLocation = function(geoLocation) {
-      map.changeLocation(geoLocation.location.lat, geoLocation.location.lng);
+      lvm.changeLocation(geoLocation.location.lat, geoLocation.location.lng);
     };
   });
 });

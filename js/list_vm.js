@@ -1,4 +1,4 @@
-define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pattern', 'config'], function(ko, gmaps, wikiImage, streetImage, fourSquareImage, silly, config) {
+define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map_item'], function(ko, map, wikiImage, streetImage, fourSquareImage, silly, config, api, growl, MapItem) {
   return silly('list-view', function() {
     var self = this;
 
@@ -54,27 +54,51 @@ define(['ko', 'gmaps', 'wiki_image', 'street_image', 'foursquare_image', 'silly_
 
     this.viewMuseum = function(museum) {
       if (self.active_) {
-        // deactivate
-        self.active_.marker.setAnimation(null);
+        self.active_.deactivate();
       }
 
       console.log("You clicked " + museum.title);
       if (museum.marker) {
         console.log(museum.marker.getPosition());
-        museum.marker.setAnimation(gmaps.Animation.BOUNCE);
-        setTimeout(function() {
-          museum.hideMarker();
-        }, config.bounceTime);
-
-        var markerLoc = museum.marker.getPosition();
-        museum.marker.getMap().panTo(markerLoc);
+        museum.activate();
 
         wikiImage.title(museum.title);
-        streetImage.location({lat: markerLoc.lat(), lng: markerLoc.lng()});
-        fourSquareImage.location(markerLoc.lat(), markerLoc.lng());
+        streetImage.location({lat: museum.lat, lng: museum.lng});
+        fourSquareImage.location(museum.lat, museum.lng);
       }
 
       self.active_ = museum;
+    };
+
+    this.changeLocation = function(lat, lng, radius) {
+      if (!radius) {
+        radius = config.defaults.radius;
+      }
+
+      var location = {lat: lat, lng: lng};
+      map.setCenter(location);
+
+      api.gmapPlaces(location, radius, ['museum'], map).fail(function(errorMsg) {
+        growl.error({title: "Places API Error", message: errorMsg});
+      }).done(function(foundPlaces) {
+        self.museums.removeAll();
+
+        for (var i = 0; i < foundPlaces.length; i++) {
+          var place = foundPlaces[i];
+          var m = (function () {
+            var item = new MapItem(map, place,
+                                   function() {
+                                     self.setHovered(item);
+                                   },
+                                   function() {
+                                     self.viewMuseum(item);
+                                   });
+            return item;
+          })();
+
+          self.museums.push(m);
+        }
+      });
     };
   });
 });
