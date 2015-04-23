@@ -116,3 +116,23 @@ the spot.
 	- when filtered list is rebuilt
 
       - custom layering to draw "digits"?
+
+
+* Final todo
+  - [X] finish wikipedia extract
+  https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exchars=175&titles=Therion
+
+  - [ ] show wikipedia extract along with wiki image
+  require(['apis/wikipedia_extract'])
+  require('apis/wikipedia_extract')('Bolshoi Theatre', 175).done(function(x) {$('#extract').html(x.extract)})
+
+  - [ ] responsive stuff
+    - [ ] phone portrait
+    - [ ] phone landscape
+    - [ ] tablet portrait
+    - [ ] tablet landscape
+    - [ ] desktop
+
+    - [ ] listview size in different modes
+    - [ ] hide wiki view in phone mode?
+    - [ ] do not query wiki in phone mode - js media queries

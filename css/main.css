@@ -44,12 +44,17 @@ li span {
 }
 
 #street-image {
-    position: absolute;
+/*    position: absolute;
     width: 30%;
     height: 30%;
     z-index: 1;
     bottom: 1%;
     left: 1%;
+*/
+  float: left;
+  max-width: calc(100% / 3);
+  height: auto;
+  position: relative;
 }
 
 #street-image img {
@@ -58,12 +63,19 @@ li span {
 }
 
 #wiki-image {
-    position: absolute;
+/*    position: absolute;
     width: 30%;
     height: 30%;
     z-index: 1;
     top: 10%;
     left: 1%;
+*/
+    position: relative;
+    max-width: calc(100% / 3);
+    float: left;
+    height: 17vmin;
+    padding-right: 1%;
+    width: 36vmin;
 }
 
 #wiki-image img {
@@ -72,12 +84,16 @@ li span {
 }
 
 #foursquare-image {
-    position: absolute;
+/*    position: absolute;
     width: 30%;
     height: 30%;
     z-index: 1;
     bottom: 34%;
     left: 1%;
+*/
+  float: left;
+  max-width: calc(100% / 3);
+  padding-right: 1%;
 }
 
 #foursquare-image img {
@@ -87,9 +103,10 @@ li span {
 
 #images {
     background-color: rgba(200, 200, 200, 0.45);
-    width: 20%;
-    height: 60%;
+    width: auto;
+    height: 200px;
     position: absolute;
-    left: 10%;
-    top: 20%;
+    left: 0%;
+    bottom: 0%;
+    z-index: 1;
 }
