@@ -31,10 +31,10 @@ the spot.
 - jquery-growl (https://github.com/ksylvest/jquery-growl) - used for displaying error messages, warnings, etc
 
 * TODO
-  - [ ] clear current museums even if places finds nothing - that is when we change location,
+  - [X] clear current museums even if places finds nothing - that is when we change location,
         we should start from empty museums list in all cases
-  - [ ] stop animations for existing marker(s), when selecting a museum
-  - [ ] click on marker and select list view item
+  - [X] stop animations for existing marker(s), when selecting a museum
+  - [X] click on marker and select list view item
   - [X] once list view item/marker is selected
     - [X] load a picture
     - load some info
@@ -52,19 +52,11 @@ the spot.
          There should be a filtering function on markers that already show up.
          Simply providing a search function through a third-party API is not enough.
    - [X] Implement a list view of the identified locations.
-   - [ ] Add additional functionality using third-party APIs
+   - [X] Add additional functionality using third-party APIs
          when a map marker,
          search result,
          or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc).
          If you need a refresher on making AJAX requests to third-party servers, check out our Intro to AJAX course.
-
-
-https://developers.google.com/maps/documentation/javascript/events
-var listener1 = google.maps.event.addListener(marker, 'click', aFunction);
-var listener2 = google.maps.event.addListener(marker, 'mouseover', bFunction);
-
-// Remove listener1 and listener2 from marker instance.
-google.maps.event.clearInstanceListeners(marker);
 
 * Register for APIs
   - [X] foursquare
@@ -89,19 +81,19 @@ google.maps.event.clearInstanceListeners(marker);
         - [X] no bouncing (if there was any)
         - [X] no "boldness"
 	- its data should get lost
-	  - images disappear
-	    - streetview
-	    - foursquare
-	    - wikiimage
+	  - [X] images disappear
+	    - [X] streetview
+	    - [X] foursquare
+	    - [X] wikiimage
 	  - wiki data should disappear as well
-      - marker must bounce on activation
-      - show this activity as "bold" font or something
+      - [X] marker must bounce on activation
+      - [X] show this activity as "bold" font or something
       - streetview shows loading
       - foursquare shows loading
       - streetview shows loading
       - when loaded images appear
-      - if not loaded - brief "error" message appears in the corresponding divs
-  - hovering over a marker should make "active" the corresponding list item
+      - [X] if not loaded - brief "error" message appears in the corresponding divs
+  - [X] hovering over a marker should make "active" the corresponding list item
 
   - make sure responsiveness is there
     - create breakpoints if needed?
@@ -109,7 +101,7 @@ google.maps.event.clearInstanceListeners(marker);
       - show images horizontally in landscape?
       - use different width per image depending on media query (mobile, tablet, xlarge - steal definitions from bootstrap?)
 
-  - finish filtering
+  - [X] finish filtering
 
   - [X] foursquare image
 
