@@ -76,9 +76,20 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
         wikiImage.title(item.title);
         streetImage.location({lat: item.lat, lng: item.lng});
         fourSquareImage.location(item.lat, item.lng);
+
+        self.active_ = item;
+        api.wikipediaExtract(item.title).done(function(extract) {
+          if (self.active_ === item) {
+            // make sure that user has not chosen another item
+            // while extract arrived
+            item.infoWindow(extract.extract);
+          }
+        }).fail(function(errMsg) {
+          growl.error({title: 'Wikipedia Extract', message: errMsg});
+        });
       }
 
-      self.active_ = item;
+
     };
 
     this.changeLocation = function(lat, lng, radius) {

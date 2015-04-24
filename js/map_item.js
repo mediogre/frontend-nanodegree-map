@@ -1,4 +1,7 @@
 define(['gmaps', 'config'], function(gmaps, config) {
+  // shared info window
+  var infoWindow = new gmaps.InfoWindow();
+
   var MapItem = function(map, place, mouseOver, mouseClick) {
     this.title = place.name;
     this.lat = place.geometry.location.lat();
@@ -19,6 +22,7 @@ define(['gmaps', 'config'], function(gmaps, config) {
 
   MapItem.prototype.deactivate = function() {
     this.marker.setAnimation(null);
+    infoWindow.close();
   };
 
   MapItem.prototype.activate = function() {
@@ -40,6 +44,11 @@ define(['gmaps', 'config'], function(gmaps, config) {
   MapItem.prototype.hide = function() {
     this.marker.setAnimation(null);
     this.marker.setVisible(false);
+  };
+
+  MapItem.prototype.infoWindow = function(text) {
+    infoWindow.setContent(text);
+    infoWindow.open(this.marker.getMap(), this.marker);
   };
 
   return MapItem;
