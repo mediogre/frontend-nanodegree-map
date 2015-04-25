@@ -43,70 +43,17 @@ li span {
     width: 17em;
 }
 
-#street-image {
-/*    position: absolute;
-    width: 30%;
-    height: 30%;
-    z-index: 1;
-    bottom: 1%;
-    left: 1%;
-*/
-  float: left;
-  max-width: calc(100% / 3);
-  height: auto;
-  position: relative;
-}
-
-#street-image img {
-    max-width: 100%;
-    height: auto;
-}
-
-#wiki-image {
-/*    position: absolute;
-    width: 30%;
-    height: 30%;
-    z-index: 1;
-    top: 10%;
-    left: 1%;
-*/
-    position: relative;
-    max-width: calc(100% / 3);
-    float: left;
-    height: 17vmin;
-    padding-right: 1%;
-    width: 36vmin;
-}
-
-#wiki-image img {
-    max-width: 100%;
-    height: auto;
-}
-
-#foursquare-image {
-/*    position: absolute;
-    width: 30%;
-    height: 30%;
-    z-index: 1;
-    bottom: 34%;
-    left: 1%;
-*/
-  float: left;
-  max-width: calc(100% / 3);
-  padding-right: 1%;
-}
-
-#foursquare-image img {
-    max-width: 100%;
-    height: auto;
-}
-
 #images {
-    background-color: rgba(200, 200, 200, 0.45);
-    width: auto;
-    height: 200px;
+    width: 30%;
     position: absolute;
-    left: 0%;
+    left: 3px;
     bottom: 0%;
     z-index: 1;
+}
+
+#images img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+    width: calc(50% - 2px);
 }
