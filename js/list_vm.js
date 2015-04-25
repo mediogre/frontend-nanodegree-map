@@ -1,4 +1,4 @@
-define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map_item'], function(ko, map, wikiImage, streetImage, fourSquareImage, silly, config, api, growl, MapItem) {
+define(['ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map_item', 'images_vm'], function(ko, map, silly, config, api, growl, MapItem, imagesVM) {
   return silly('list-view', function() {
     var self = this;
 
@@ -61,9 +61,7 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
         self.active_.deactivate();
         self.active_ = null;
 
-        wikiImage.url(null);
-        streetImage.url(null);
-        fourSquareImage.url(null);
+        imagesVM.clear();
       }
     };
 
@@ -73,9 +71,7 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
       if (item.marker) {
         item.activate();
 
-        wikiImage.title(item.title);
-        streetImage.location({lat: item.lat, lng: item.lng});
-        fourSquareImage.location(item.lat, item.lng);
+        imagesVM.location({lat: item.lat, lng: item.lng});
 
         self.active_ = item;
         api.wikipediaExtract(item.title).done(function(extract) {
@@ -88,8 +84,6 @@ define(['ko', 'map', 'wiki_image', 'street_image', 'foursquare_image', 'silly_pa
           growl.error({title: 'Wikipedia Extract', message: errMsg});
         });
       }
-
-
     };
 
     this.changeLocation = function(lat, lng, radius) {

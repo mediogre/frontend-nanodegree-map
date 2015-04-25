@@ -18,7 +18,7 @@
     <h6 id="wait_msg">Loading Google Maps...</h1>
     <div id="map-canvas"></div>
 
-    <div id='list-view'>
+    <div id='list-view' data-bind="visible: true" style="display: none">
       <label>Filter
 	<input data-bind="textInput: filter">
       </label>
@@ -29,7 +29,7 @@
       </ul>
     </div>
 
-    <div id='geo-view'>
+    <div id='geo-view' data-bind="visible: true" style="display: none">
       <input data-bind="textInput: searchCenter">
       <ul>
     	<!-- ko foreach: listOfLocations -->
@@ -38,17 +38,13 @@
       </ul>
     </div>
 
-    <div id='images'>
-      <div id='wiki-image'>
-	<img data-bind="attr: {src: url}">
-      </div>
-
+    <div id='images' data-bind="visible: true" style="display: none">
       <div id='foursquare-image'>
-	<img data-bind="attr: {src: url}">
+	<img data-bind="attr: {src: foursquareUrl}">
       </div>
 
       <div id='street-image'>
-	<img data-bind="attr: {src: url}">
+	<img data-bind="attr: {src: streetUrl}">
       </div>
     </div>
 
