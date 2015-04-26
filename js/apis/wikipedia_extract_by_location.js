@@ -78,5 +78,3 @@ define(['jquery'], function($) {
     return d.promise();
   };
 });
-
-
