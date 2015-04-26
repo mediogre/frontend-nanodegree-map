@@ -9,7 +9,8 @@ define(['ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map
       rateLimit: {
         timeout: 250,
         method: "notifyWhenChangesStop"
-      }
+      },
+      notify: 'always'
     });
 
     this.filter.subscribe(function(value) {
