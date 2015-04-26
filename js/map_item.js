@@ -4,8 +4,8 @@ define(['gmaps', 'config'], function(gmaps, config) {
 
   var MapItem = function(map, place, mouseOver, mouseClick) {
     this.title = place.name;
-    this.lat = place.geometry.location.lat();
-    this.lng = place.geometry.location.lng();
+    this.location = {lat: place.geometry.location.lat(),
+                     lng: place.geometry.location.lng()};
     this.marker = new gmaps.Marker({
       map: map,
       position: place.geometry.location

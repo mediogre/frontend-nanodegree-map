@@ -9,7 +9,7 @@
 // Actual APIs are implemented as a separate modules apis/xxx, apis/yyy, etc
 // This is a facade which brings them all together for easier use.
 define(['apis/places', 'apis/geocode', 'apis/street_image',
-        'apis/wikipedia_image', 'apis/wikipedia_extract',
+        'apis/wikipedia_image', 'apis/wikipedia_extract_by_location',
         'apis/foursquare'],
        function(gmapPlaces, geocode, streetImageURL,
                 wikipediaImages, wikipediaExtract,

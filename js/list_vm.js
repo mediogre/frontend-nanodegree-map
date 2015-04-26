@@ -71,10 +71,10 @@ define(['ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map
       if (item.marker) {
         item.activate();
 
-        imagesVM.location({lat: item.lat, lng: item.lng});
+        imagesVM.location(item.location);
 
         self.active_ = item;
-        api.wikipediaExtract(item.title).done(function(extract) {
+        api.wikipediaExtract(item.location, 500).done(function(extract) {
           if (self.active_ === item) {
             // make sure that user has not chosen another item
             // while extract arrived
