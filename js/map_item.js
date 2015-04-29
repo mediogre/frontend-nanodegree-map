@@ -47,6 +47,8 @@ define(['gmaps', 'config'], function(gmaps, config) {
   };
 
   MapItem.prototype.infoWindow = function(text) {
+    infoWindow.close();
+    infoWindow.setOptions({maxWidth: 200});
     infoWindow.setContent(text);
     infoWindow.open(this.marker.getMap(), this.marker);
   };
