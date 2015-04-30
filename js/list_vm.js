@@ -95,13 +95,13 @@ define(['ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map
       var location = {lat: lat, lng: lng};
       map.setCenter(location);
 
+      self.items.removeAll();
+      self.matchedItems.removeAll();
+      self.clearActive();
+
       api.gmapPlaces(location, radius, ['museum']).fail(function(errorMsg) {
         growl.error({title: "Places API Error", message: errorMsg});
       }).done(function(foundPlaces) {
-        self.items.removeAll();
-        self.matchedItems.removeAll();
-        self.clearActive();
-
         for (var i = 0; i < foundPlaces.length; i++) {
           var place = foundPlaces[i];
           var m = (function () {

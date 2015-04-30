@@ -31,7 +31,7 @@
 
     <div id='geo-view' data-bind="visible: true" style="display: none">
       <input data-bind="textInput: searchCenter">
-      <ul>
+      <ul id='geo-nav'>
     	<!-- ko foreach: listOfLocations -->
     	<li><span data-bind="text: formatted_address, click: $parent.goToLocation"></span></li>
     	<!-- /ko -->

@@ -13,7 +13,7 @@ ul {
     padding: 0px;
 }
 
-ul#nav li span:hover, ul#nav li.active span {
+ul#nav li span:hover, ul#nav li.active span, ul#geo-nav li span:hover, ul#geo-nav li.active span {
     text-decoration: none;
     background: rgba(147, 154, 161, 0.47);
 }
@@ -27,7 +27,7 @@ li span {
 #list-view {
     position: absolute;
     z-index: 1;
-    top: 0;
+    bottom: 0;
     width: 30ex;
     height: auto;
     max-height: 100%;
