@@ -1,9 +1,10 @@
-define(['ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map_item', 'images_vm'], function(ko, map, silly, config, api, growl, MapItem, imagesVM) {
+define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map_item', 'images_vm'], function($, ko, map, silly, config, api, growl, MapItem, imagesVM) {
   return silly('list-view', function() {
     var self = this;
 
-    self.items = ko.observableArray([]).extend({ notify: 'always' });
-    self.matchedItems = ko.observableArray([]);
+    this.hidden = false;
+    this.items = ko.observableArray([]).extend({ notify: 'always' });
+    this.matchedItems = ko.observableArray([]);
 
     this.filter = ko.observable("").extend({
       rateLimit: {
@@ -12,6 +13,20 @@ define(['ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'growl', 'map
       },
       notify: 'always'
     });
+
+    this.hide = function() {
+      if (!this.hidden) {
+        this.hidden = true;
+        $('#list-view').css({right: "-25ex"});
+      }
+    };
+
+    this.unhide = function() {
+      if (this.hidden) {
+        this.hidden = false;
+        $('#list-view').css({right: "0"});
+      }
+    };
 
     this.filter.subscribe(function(value) {
       var i, l, item;
