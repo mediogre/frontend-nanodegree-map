@@ -2,6 +2,9 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
   return silly('list-view', function() {
     var self = this;
 
+    // an "arrow control" - used to return list view back into the viewport
+    var $arrow = $('#list-arrow');
+
     this.hidden = false;
     this.items = ko.observableArray([]).extend({ notify: 'always' });
     this.matchedItems = ko.observableArray([]);
@@ -14,17 +17,28 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
       notify: 'always'
     });
 
+    // $('#list-view').hover(function() {
+    //   self.unhide();
+    //   return false;
+    // }, function () {return false;});
+
     this.hide = function() {
       if (!this.hidden) {
         this.hidden = true;
-        $('#list-view').css({right: "-25ex"});
+        $('#list-view').animate({right: "-25ex"},
+                                {complete: function() {
+                                  $arrow.show();
+                                }});
       }
     };
 
     this.unhide = function() {
       if (this.hidden) {
         this.hidden = false;
-        $('#list-view').css({right: "0"});
+        $('#list-view').animate({right: "0"},
+                                {complete: function() {
+                                  $arrow.hide();
+                                }});
       }
     };
 
@@ -82,6 +96,7 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
     };
 
     this.chooseItem = function(item) {
+      self.hide();
       self.clearActive();
 
       if (item.marker) {
@@ -122,7 +137,9 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
           var m = (function () {
             var item = new MapItem(map, place,
                                    function() {
-                                     self.setHovered(item);
+                                     if (!self.hidden) {
+                                       self.setHovered(item);
+                                     }
                                    },
                                    function() {
                                      self.chooseItem(item);

@@ -2,6 +2,7 @@ html, body, #map-canvas {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 li {
@@ -36,6 +37,17 @@ li span {
     background-color: rgba(200, 200, 200, 0.45);
 }
 
+#list-arrow {
+    position: absolute;
+    top: 50%;
+    margin-left: 1ex;
+    cursor: pointer;
+}
+
+#list-proper {
+    margin-left: 3ex;
+}
+
 #geo-view {
     position: absolute;
     top: 0;
@@ -63,4 +75,8 @@ li span {
     height: auto;
     display: inline-block;
     width: calc(50% - 2px);
+}
+
+.hidden {
+    display: none;
 }
