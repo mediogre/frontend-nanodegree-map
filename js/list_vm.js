@@ -135,14 +135,19 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
       var location = {lat: lat, lng: lng};
       map.setCenter(location);
 
-      self.items.removeAll();
+      var removed = self.items.removeAll();
+      var i = 0;
+      // cleanup map items (by removing markers from the map)
+      for (; i < removed.length; i++) {
+        removed[i].remove();
+      }
       self.matchedItems.removeAll();
       self.clearActive();
 
       api.gmapPlaces(location, radius, ['museum']).fail(function(errorMsg) {
         growl.error({title: "Places API Error", message: errorMsg});
       }).done(function(foundPlaces) {
-        for (var i = 0; i < foundPlaces.length; i++) {
+        for (i = 0; i < foundPlaces.length; i++) {
           var place = foundPlaces[i];
           var m = (function () {
             var item = new MapItem(map, place,

@@ -20,6 +20,11 @@ define(['gmaps', 'config'], function(gmaps, config) {
     }
   };
 
+  MapItem.prototype.remove = function() {
+    this.deactivate();
+    this.marker.setMap(null);
+  };
+
   MapItem.prototype.deactivate = function() {
     this.marker.setAnimation(null);
     infoWindow.close();
