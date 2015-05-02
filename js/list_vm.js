@@ -14,11 +14,6 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
       notify: 'always'
     });
 
-    // $('#list-view').hover(function() {
-    //   self.unhide();
-    //   return false;
-    // }, function () {return false;});
-
     this.arrowText = ko.computed(function() {
       if (self.hidden()) {
         return "<";
@@ -102,8 +97,16 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
       }
     };
 
+    // determine if list view is too big for current viewport
+    // that is it takes close to half of the screen or more
+    this.tooBig = function() {
+      return !window.matchMedia("(min-width: 70ex").matches;
+    };
+
     this.chooseItem = function(item) {
-      self.hide();
+      if (self.tooBig()) {
+        self.hide();
+      }
       self.clearActive();
 
       if (item.marker) {

@@ -126,12 +126,12 @@ the spot.
   require(['apis/wikipedia_extract'])
   require('apis/wikipedia_extract')('Bolshoi Theatre', 175).done(function(x) {$('#extract').html(x.extract)})
 
-  - [ ] responsive stuff
-    - [ ] phone portrait
-    - [ ] phone landscape
-    - [ ] tablet portrait
-    - [ ] tablet landscape
-    - [ ] desktop
+  - [-] responsive stuff
+    - [X] phone portrait
+    - [X] phone landscape
+    - [X] tablet portrait
+    - [X] tablet landscape
+    - [X] desktop
 
     - [ ] listview size in different modes
 
