@@ -18,19 +18,17 @@
     <h6 id="wait_msg">Loading Google Maps...</h1>
     <div id="map-canvas"></div>
 
-    <div id="list-view" data-bind="visible: true" style="display: none">
-      <div id="list-arrow" data-bind="click: unhide">
-	&lt;
-      </div>
+    <div id="list-view" data-bind="visible: true">
+      <div id="list-arrow" data-bind="text: arrowText, click: toggleVisibility"></div>
       <div id="list-proper">
-      <label>Filter
-	<input data-bind="textInput: filter">
-      </label>
-      <ul id='nav'>
-	<!-- ko foreach: matchedItems -->
-	<li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.chooseItem"></span></li>
-	<!-- /ko -->
-      </ul>
+	<label>Filter
+	  <input data-bind="textInput: filter">
+	</label>
+	<ul id='nav'>
+	  <!-- ko foreach: matchedItems -->
+	  <li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.chooseItem"></span></li>
+	  <!-- /ko -->
+	</ul>
       </div>
     </div>
 

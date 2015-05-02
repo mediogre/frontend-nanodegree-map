@@ -2,10 +2,7 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
   return silly('list-view', function() {
     var self = this;
 
-    // an "arrow control" - used to return list view back into the viewport
-    var $arrow = $('#list-arrow');
-
-    this.hidden = false;
+    this.hidden = ko.observable(false);
     this.items = ko.observableArray([]).extend({ notify: 'always' });
     this.matchedItems = ko.observableArray([]);
 
@@ -22,23 +19,33 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
     //   return false;
     // }, function () {return false;});
 
+    this.arrowText = ko.computed(function() {
+      if (self.hidden()) {
+        return "<";
+      } else {
+        return ">";
+      }
+    });
+
+    this.toggleVisibility = function() {
+      if (this.hidden()) {
+        this.unhide();
+      } else {
+        this.hide();
+      }
+    };
+
     this.hide = function() {
-      if (!this.hidden) {
-        this.hidden = true;
-        $('#list-view').animate({right: "-25ex"},
-                                {complete: function() {
-                                  $arrow.show();
-                                }});
+      if (!this.hidden()) {
+        this.hidden(true);
+        $('#list-view').animate({right: "-25ex"});
       }
     };
 
     this.unhide = function() {
-      if (this.hidden) {
-        this.hidden = false;
-        $('#list-view').animate({right: "0"},
-                                {complete: function() {
-                                  $arrow.hide();
-                                }});
+      if (this.hidden()) {
+        this.hidden(false);
+        $('#list-view').animate({right: "0"});
       }
     };
 
@@ -137,7 +144,7 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
           var m = (function () {
             var item = new MapItem(map, place,
                                    function() {
-                                     if (!self.hidden) {
+                                     if (!self.hidden()) {
                                        self.setHovered(item);
                                      }
                                    },
