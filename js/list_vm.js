@@ -143,6 +143,7 @@ define(['jquery', 'ko', 'map', 'silly_pattern', 'config', 'third_party_api', 'gr
       }
       self.matchedItems.removeAll();
       self.clearActive();
+      self.unhide();
 
       api.gmapPlaces(location, radius, ['museum']).fail(function(errorMsg) {
         growl.error({title: "Places API Error", message: errorMsg});
