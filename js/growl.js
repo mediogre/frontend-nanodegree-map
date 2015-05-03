@@ -1,3 +1,3 @@
-define(['jquery'], function($) {
+define(['jquery', 'jquery.growl'], function($) {
   return $.growl;
 });

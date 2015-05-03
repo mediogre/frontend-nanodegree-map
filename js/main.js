@@ -48,5 +48,5 @@ function alrightRequireItIs() {
   });
 
   // finally!!!
-  require(['js/app.js']);
+  require(['app']);
 }
