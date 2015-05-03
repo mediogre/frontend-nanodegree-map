@@ -28,16 +28,6 @@
 // now we simply start our app and it's completely oblivious to all the troubles we went through
 //
 function alrightRequireItIs() {
-  // // define jquery
-  // define('jquery', function() {
-  //   return jQuery;
-  // });
-
-  // define knockout
-  // define('ko', function () {
-  //   return ko;
-  // });
-
   // define gmaps to allow our app to depend on it and not use globals
   define('gmaps', function () {
     return google.maps;
