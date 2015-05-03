@@ -1,4 +1,4 @@
-define(['silly_pattern', 'third_party_api', 'growl'], function(silly, api, growl) {
+define(['silly_pattern', 'third_party_api', 'growl', 'ko'], function(silly, api, growl, ko) {
   return silly('images', function() {
     var self = this;
 

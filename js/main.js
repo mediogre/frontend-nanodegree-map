@@ -28,19 +28,33 @@
 // now we simply start our app and it's completely oblivious to all the troubles we went through
 //
 function alrightRequireItIs() {
-  // define jquery
-  define('jquery', function() {
-    return jQuery;
-  });
+  // // define jquery
+  // define('jquery', function() {
+  //   return jQuery;
+  // });
 
   // define knockout
-  define('ko', function () {
-    return ko;
-  });
+  // define('ko', function () {
+  //   return ko;
+  // });
 
   // define gmaps to allow our app to depend on it and not use globals
   define('gmaps', function () {
     return google.maps;
+  });
+
+  require.config({
+    baseUrl: './js/',
+    paths: {
+      jquery: 'lib/jquery-1.11.2.min',
+      'jquery.growl': 'lib/jquery.growl',
+      'ko': 'lib/knockout-3.3.0'
+    },
+
+    shim: {
+      'jquery.growl': ['jquery'],
+      'ko': ['jquery']
+    }
   });
 
   // finally!!!
