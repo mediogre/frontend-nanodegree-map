@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Udacity Map</title>
 
+    <!-- build:css css/style.min.css -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/jquery.growl.css">
+    <!-- endbuild -->
   </head>
   <body>
     <h6 id="wait_msg">Loading Google Maps...</h1>
@@ -16,23 +18,23 @@
     <div id="list-view" data-bind="visible: true">
       <div id="list-arrow" data-bind="text: arrowText, click: toggleVisibility"></div>
       <div id="list-proper">
-	<label>Filter
-	  <input data-bind="textInput: filter">
-	</label>
-	<ul id='nav'>
-	  <!-- ko foreach: matchedItems -->
-	  <li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.chooseItem"></span></li>
-	  <!-- /ko -->
-	</ul>
+        <label>Filter
+          <input data-bind="textInput: filter">
+        </label>
+        <ul id='nav'>
+          <!-- ko foreach: matchedItems -->
+          <li data-bind="css: $parent.hovered($index, $element)"><span data-bind="text: title, click: $parent.chooseItem"></span></li>
+          <!-- /ko -->
+        </ul>
       </div>
     </div>
 
     <div id='geo-view' data-bind="visible: true" style="display: none">
       <input data-bind="textInput: searchCenter">
       <ul id='geo-nav'>
-    	<!-- ko foreach: listOfLocations -->
-    	<li><span data-bind="text: formatted_address, click: $parent.goToLocation"></span></li>
-    	<!-- /ko -->
+        <!-- ko foreach: listOfLocations -->
+        <li><span data-bind="text: formatted_address, click: $parent.goToLocation"></span></li>
+        <!-- /ko -->
       </ul>
     </div>
 
