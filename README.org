@@ -31,6 +31,8 @@ the spot.
 At the moment this app allows to choose any location and browse nearby museums (although any type of place supported by Places API can be used).
 Top-left input string controls the location and automatically populates list of matching geolocations.
 Clicking on a location would change the map and nearby museums would appear represented by both markers on the map and items in the right-side list view.
+A list of items can be filtered by a string value entered into "Filter" input above the list view. 
+This will automatically narrow down the list and leave only matching items on the map.
 Clicking on a marker or a list view extracts the relevant information about the place using other external APIs, namely:
 - streetview image from Google Streeview API
 - an image from FourSquare API for that location
@@ -47,4 +49,6 @@ A simple grunt-based building was also added for the obtaining the final result:
 - r.js is used to generate a single js file containing all the modules and libs
 - css files are concatenated and minified
 Just running npm install (to get dev dependencies) and grunt will produce the final result in 'build/' directory.
+
+That final result has been pushed to my github-pages repository and can be viewed at: http://mediogre.github.io/map
 
