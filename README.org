@@ -1,8 +1,6 @@
-* Requirements
-
 * "Architecture"
 - RequireJS is used for "modularity"
-- r.js will be used for final optimized build
+- r.js is used for final optimized build
 - GoogleMaps API presents a bit of a challenge to this idealized picture,
 since it loads asynchronously and we must be user-friendly and handle the
 situation where it fails to load properly. Most examples of using GoogleMaps API
@@ -20,126 +18,33 @@ the spot.
 2. app.js is "required".
 3. It in turn:
    - initializes full-screen map
-   - initializes PlacesViewModel
+   - initializes ListViewModel
    - initializes GeopositionViewmodel
    - sets initial location (Moscow)
 4. Each viewmodel makes sure to apply bindings to its own "view".
-
 
 * References
 - Idea of gluing modules came from this http://stackoverflow.com/a/28466452/404328
 - jquery-growl (https://github.com/ksylvest/jquery-growl) - used for displaying error messages, warnings, etc
 
-* TODO
-  - [X] clear current museums even if places finds nothing - that is when we change location,
-        we should start from empty museums list in all cases
-  - [X] stop animations for existing marker(s), when selecting a museum
-  - [X] click on marker and select list view item
-  - [X] once list view item/marker is selected
-    - [X] load a picture
-    - load some info
-      - wikipedia?
-    - [X] load foursquare venue stuff
+* App overview
+At the moment this app allows to choose any location and browse nearby museums (although any type of place supported by Places API can be used).
+Top-left input string controls the location and automatically populates list of matching geolocations.
+Clicking on a location would change the map and nearby museums would appear represented by both markers on the map and items in the right-side list view.
+Clicking on a marker or a list view extracts the relevant information about the place using other external APIs, namely:
+- streetview image from Google Streeview API
+- an image from FourSquare API for that location
+- a wiki page search is done using Wikipedia GeoData API and then an extract of that page is requested
+- an extract is then used for infowindow corresponding to the place
 
+All APIs use jquery deferreds to hide "complexity" of particular data format, finish at their own pace and resolve with simplified result or reject with an error message.
 
-* Udacity Rubric
-** How will I complete this Project?
-   - [X] Review our course JavaScript Design Patterns.
-   - [X] Download the Knockout framework.
-   - [X] Write code required to add a full-screen map to your page using the Google Maps API.
-   - [X] Write code required to add map markers identifying a number of locations your are interested in within this neighborhood.
-   - [ ] Implement the search bar functionality to search and filter your map markers.
-         There should be a filtering function on markers that already show up.
-         Simply providing a search function through a third-party API is not enough.
-   - [X] Implement a list view of the identified locations.
-   - [X] Add additional functionality using third-party APIs
-         when a map marker,
-         search result,
-         or list view entry is clicked (ex. Yelp reviews, Wikipedia, StreetView/Flickr images, etc).
-         If you need a refresher on making AJAX requests to third-party servers, check out our Intro to AJAX course.
+Responsiveness is achieved by using relative sizes for list view, geoview and images. Rigid breakpoints based on media queries were not used,
+instead listview "adapts" to the viewport using width based on EXes. In case if listview is larger than half of the screen (in EXes) and does not allow to interact with 
+the map, it automatically hides itself when the item is selected to make room for the map, read infoview, etc. The user can return list view back by clicking on an "arrow" at any time.
 
-* Register for APIs
-  - [X] foursquare
+A simple grunt-based building was also added for the obtaining the final result:
+- r.js is used to generate a single js file containing all the modules and libs
+- css files are concatenated and minified
+Just running npm install (to get dev dependencies) and grunt will produce the final result in 'build/' directory.
 
-* TODO rough
-  - create 3 images strip
-    - wiki
-    - streetview
-    - foursquare
-
-    - they should always show something - like "Loading" or "No image"
-    - show errors?
-    - show them vertically if device is "vertical"
-    - show them horizontally if device is "horizontal"
-
-  - introduce active museum
-    - [X] activated by a click on marker
-    - [X] activated by clicking list item as well
-
-    - when active museum is selected:
-      - previous active (if any) should lose activity
-        - [X] no bouncing (if there was any)
-        - [X] no "boldness"
-	- its data should get lost
-	  - [X] images disappear
-	    - [X] streetview
-	    - [X] foursquare
-	    - [X] wikiimage
-	  - wiki data should disappear as well
-      - [X] marker must bounce on activation
-      - [X] show this activity as "bold" font or something
-      - streetview shows loading
-      - foursquare shows loading
-      - streetview shows loading
-      - when loaded images appear
-      - [X] if not loaded - brief "error" message appears in the corresponding divs
-  - [X] hovering over a marker should make "active" the corresponding list item
-
-  - make sure responsiveness is there
-    - create breakpoints if needed?
-      - show images (from APIs) vertically if portrait?
-      - show images horizontally in landscape?
-      - use different width per image depending on media query (mobile, tablet, xlarge - steal definitions from bootstrap?)
-
-  - [X] finish filtering
-
-  - [X] foursquare image
-
-  - wikipedia data
-
-  - selecting markers by keyboard would be slick?
-    - assign 1, 2, 3, 4, 5 to first markers
-      - shows those numbers in both markers and list view
-      - numbers are to be affected by filtering and changes to places
-
-      - numbers are assigned dynamically?
-	- when filtered list is rebuilt
-
-      - custom layering to draw "digits"?
-
-
-* Final todo
-  - [X] finish wikipedia extract
-  https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exchars=175&titles=Therion
-
-  - [X] show wikipedia extract along with wiki image
-  require(['apis/wikipedia_extract'])
-  require('apis/wikipedia_extract')('Bolshoi Theatre', 175).done(function(x) {$('#extract').html(x.extract)})
-
-  - [-] responsive stuff
-    - [X] phone portrait
-    - [X] phone landscape
-    - [X] tablet portrait
-    - [X] tablet landscape
-    - [X] desktop
-
-    - [ ] listview size in different modes
-
-    - [ ] add style to geo view
-      - the same translucent backgroun
-      - clickable-hovered "active" item
-      - hide locations once they have been clicked?
-    - images in phone mode
-    - images in tablet mode
-  - r.js?
-  - review all rubric stuff
