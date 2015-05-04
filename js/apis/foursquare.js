@@ -1,5 +1,6 @@
 define(['jquery', 'config'], function($, config) {
-  // foursquare
+  // foursquare API
+  // returns a promise which is resolved with found url or rejected with error message
   return function(lat, lng, imageWidth, imageHeight) {
     if (!imageWidth) {
       imageWidth = 200;

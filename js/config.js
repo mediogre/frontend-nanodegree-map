@@ -1,8 +1,11 @@
 define(function() {
-  // not much to config yet - but things like API_KEY, etc can be put in this object later
+  // this is the object used to store all the various configuraton settings used by the app
   return {
     // default values - used by various components of the app, mostly by 'map'
     defaults: {
+      // initial "location"
+      centerLocation: 'Moscow',
+      
       // Moscow location to be used for initial map center
       center:  {lat: 55.752532, lng: 37.622828},
 

@@ -1,11 +1,18 @@
 define(['silly_pattern', 'third_party_api', 'growl', 'ko'], function(silly, api, growl, ko) {
+  // Images ViewModel
   return silly('images', function() {
     var self = this;
 
+    // current location
     this.location = ko.observable();
+
+    // url for the location coming from StreetView API
     this.streetUrl = ko.observable();
+
+    // url for the location coming from FourSquare API
     this.foursquareUrl = ko.observable();
 
+    // when location changes we must update images accordingly
     this.location.subscribe(function(v) {
       // update street image 
       self.streetUrl(api.streetImageURL(v.lat, v.lng));
@@ -21,6 +28,7 @@ define(['silly_pattern', 'third_party_api', 'growl', 'ko'], function(silly, api,
         });
     });
 
+    // clear current images (if any)
     this.clear = function() {
       this.streetUrl(null);
       this.foursquareUrl(null);

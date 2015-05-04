@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   // high-level overview of what we want to achieve:
   // - make sure we have build directory created and clean (grunt-contrib-clean)
-  // - invoke r.js so that it could generate an optimized single .js (grunt-contrib-requires)
+  // - invoke r.js so that it could generate an optimized single .js (grunt-contrib-requirejs)
   // - concat css into a single css (grunt-contrib-concat)
   // - minify obtained css (grunt-contrib-cssmin)
   // - copy index.html+require.js to build dir (grunt-contrib-copy)
